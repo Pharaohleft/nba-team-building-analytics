@@ -1,4 +1,7 @@
 # nba-team-building-analytics
+
+Note: Notebook filenames (e.g., Untitled / numeric IDs) are preserved from the original interactive environment to prevent content loss and maintain reproducibility.
+
 Overview
 
 This project applies a Moneyball-style analytical framework to NBA roster construction, focusing on how teams can maximize on-court value by identifying undervalued role players rather than over-investing in individual star talent.
