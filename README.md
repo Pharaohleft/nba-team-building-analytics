@@ -20,6 +20,7 @@ This analysis supports that objective by examining league-wide player performanc
 
 NBA roster spending shows clear inefficiencies when player salary is compared against on-court production. A small group of high-cost players consumes a disproportionate share of payroll.
 By grouping players into performance-based roles and measuring similarity within those groups, the analysis identifies viable replacement candidates delivering 80–90% of the production of higher-salary players. Importantly, these groupings remain largely stable under small statistical variation, indicating that identified alternatives are not driven by noise or outlier performance.
+
 The objective was to analyze league-wide player data to uncover usage concentration, role redundancy, player similarity, and age-related performance decline patterns that influence roster stability, succession planning, and long-term competitive viability.
 The analysis uses season-level NBA player data and combines exploratory analysis, unsupervised learning, similarity modeling, dimensionality reduction, and interactive visualization to move from raw statistics to decision-support insights.
 
@@ -80,7 +81,7 @@ All numeric features were standardized prior to analysis to ensure comparability
 Are there players across the league who produce statistically similar output to high-usage or high-salary players, but are paid significantly less?
 •	Which player attributes actually define “similarity”?
 Beyond points per game, which combination of usage, efficiency, playmaking, and defensive metrics best capture a player’s on-court role?
-* Which **undervalued players** are the best fit to fill specific team gaps?
+* Which undervalued players are the best fit to fill specific team gaps?
 
 ---
 
@@ -102,7 +103,7 @@ Beyond points per game, which combination of usage, efficiency, playmaking, and 
 ---
 
 ##  Key Insights
-1. Performance-Based Player Segmentation
+ Performance-Based Player Segmentation
 Players were grouped into four performance profiles based on multi-dimensional statistical similarity rather than traditional positions:
 <img width="388" height="198" alt="2" src="https://github.com/user-attachments/assets/9861e7ce-7ef3-4772-ab0b-7d842cc26345" />
 
@@ -118,12 +119,12 @@ This supports the interpretation that one cluster is capturing primary offensive
 
 This role-based segmentation reveals that players with similar on-court responsibilities often exist across salary tiers.
 
-2. Cost–Production Misalignment
+ Cost–Production Misalignment
    <img width="572" height="382" alt="Picture4" src="https://github.com/user-attachments/assets/e8ba91fc-4729-494b-9e44-579aab790f71" />
 Within the same performance groups, player production varies far less than player compensation. Multiple lower-cost players demonstrate statistical profiles that closely mirror those of significantly higher-paid peers, suggesting market inefficiencies driven by reputation, tenure, or contract timing rather than output alone.
 This misalignment creates opportunities for teams to reallocate salary without materially impacting performance.
 
-3. Replacement Value Identification
+ Replacement Value Identification
 <img width="580" height="385" alt="Picture5" src="https://github.com/user-attachments/assets/b96edcfc-4780-4e29-bd71-f21bbeb5e20c" />
 
 <img width="575" height="412" alt="Picture6" src="https://github.com/user-attachments/assets/3159e836-fa28-4baf-aacd-a798229b2fd7" />
@@ -146,7 +147,7 @@ Interpretation:
 
 Players who frequently shifted roles were flagged as borderline contributors, representing higher uncertainty and potential performance volatility.
 
-5. Roster Composition Insights
+ Roster Composition Insights
 <img width="578" height="455" alt="Picture8" src="https://github.com/user-attachments/assets/39db0515-fa77-4c8b-843b-1e4f34f5ebd1" />
 •	KMeans (k=4) assigns each player to one of four performance clusters.
 •	PCA (2D) compresses the standardized feature space to visualize cluster separation.
@@ -166,7 +167,7 @@ For NBA teams, this creates:
 •	Steeper performance drop-offs when stars age
 •	Higher volatility in outcomes tied to a single role cluster
 
-2. Role Redundancy and Player Similarity
+ Role Redundancy and Player Similarity
 If a high-usage player declines or misses time, are there statistically comparable players who can absorb that role?
 •	Many players classified as secondary or low-usage contributors exhibit statistical profiles similar to higher-usage peers
 •	Differences between players often stem from usage volume, not efficiency
@@ -180,7 +181,7 @@ This challenges the assumption that high-usage roles are irreplaceable.
 
 
 ---
-3. Career Trajectories and Profile Evolution
+Career Trajectories and Profile Evolution
 Analytical Question
 Do players with similar early-career profiles evolve similarly over time?
 
@@ -197,7 +198,7 @@ Front offices often extrapolate future performance from early success.
 This analysis shows that development paths are unstable, reinforcing the need for ongoing profile monitoring rather than static projections.
 
 ---
-4. Aging Curve and Scoring Decline
+Aging Curve and Scoring Decline
 How does scoring output change with age, and does this differ by position?
 <img width="752" height="405" alt="Picture13" src="https://github.com/user-attachments/assets/7e1e7831-2e99-4349-a0ab-9fb23bd9b5d0" />
 
@@ -228,7 +229,7 @@ When combined, these analyses reveal a consistent pattern:
 3.	Comparable substitutes often exist but are underutilized
 4.	Teams frequently react to player decline instead of anticipating it
 
-8.FG% – 2P% coorelation
+FG% – 2P% coorelation
 <img width="602" height="533" alt="Picture17" src="https://github.com/user-attachments/assets/92e8e449-887e-4859-9d78-75457f03751c" />
 The Midrange(The 0.96 Correlation)
 •	analysis reveals a 0.96 correlation between Midrange Efficiency (10-16ft) and FG% Efficiency.
