@@ -1,4 +1,3 @@
-# NBA Roster Optimization Analysis
 
 ## LA clippers Roster Cost Efficiency & Replacement Analysis
 
