@@ -360,10 +360,8 @@ NBA player contribution is highly concentrated within a small number of high-usa
 
 ## Recommendations
 
-- Instead of overpaying for "Elite Cluster" players, we should target the "Borderline" players identified in the PCA outputs (e.g., players statistically similar to the "Two-Way Threat" cluster but undervalued).
-- Return on Investment (ROI): Deploying this framework allows a franchise to potentially reduce payroll by 15-20% while maintaining 95% of Projected Wins Above Replacement (WAR), effectively keeping the team below the Second Apron while competing for a championship.
-- Prioritize replacing or restructuring contracts where lower-cost players provide comparable production
-- Use similarity analysis as a screening layer for trade and free-agency decisions
+- Instead of overpaying for Cluster 2 players, we should target the 3 players identified in the PCA outputs (e.g., players statistically similar to the cluster 3 but undervalued).
+- Prioritize replacing or restructuring contracts where lower-cost assets provide comparable production
 - Monitor borderline players closely due to higher performance volatility
 - Balance roster composition to reduce concentration of salary within a single role
 
@@ -371,11 +369,8 @@ NBA player contribution is highly concentrated within a small number of high-usa
 
 ## Assumptions & Caveats
 
-- Season-level data masks short-term variance
 - Raw PPG favors high-usage roles
 - Analysis is based on a single season snapshot and does not capture multi-year trends
-- Injury history, defensive schemes, and off-ball impact are not fully captured
-- Public data does not reflect internal tracking or player development projections
 - Salary figures are treated as external context rather than modeled directly
 
 ---
