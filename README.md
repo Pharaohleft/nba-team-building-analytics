@@ -1,18 +1,19 @@
 
-## LA clippers Roster Cost Efficiency & Replacement Analysis
-
-**Date:** October 2025  
+## Portfolio Cost Efficiency & Replacement Analysis  
+**Context:** Professional Sports Organization (Anonymized)  
+**Role:** Data Analyst  
+**Date:** October 2025
 
 
 ---
-
 ## Project Overview
 
-The Los Angeles Clippers operate in one of the most financially constrained environments in professional sports. As a Data Analyst supporting the LA Clippers’ basketball operations team, I worked on evaluating roster cost efficiency under the constraints of the 2024 NBA Collective Bargaining Agreement. With stricter luxury tax penalties and limited roster flexibility, leadership needed a way to analyse player production to optimize player contracts. Under the previous CBA, teams could correct roster inefficiencies by paying additional luxury tax. Under the current CBA, exceeding the Second Apron results in severe long-term penalties, including frozen future draft picks and restricted trade flexibility. As a result, inefficient contracts now pose a structural risk to the franchise rather than a temporary financial cost.
+Organizations operating under strict budget constraints must ensure that spending is aligned with measurable contribution rather than reputation or historical cost. In environments with limited flexibility, inefficient allocations introduce long-term structural risk rather than short-term financial tradeoffs.
 
-As a result, NBA front offices can no longer rely on financial spending alone to correct roster inefficiencies. Instead, teams must identify cost-efficient player alternatives that preserve on-court production while maintaining salary cap flexibility.
+In this project, I supported a professional sports organization’s operations team by analyzing cost efficiency across a constrained asset portfolio under updated regulatory rules. The objective was to evaluate whether high-cost assets were delivering proportionate contribution and to identify lower-cost alternatives capable of preserving output.
 
-This analysis supports that objective by examining league-wide player performance data to identify statistically comparable players available at lower cost, helping decision-makers evaluate replacement options, contract risk, and roster efficiency under modern cap constraints
+The analysis reframes roster construction as a portfolio optimization problem, using historical performance data to support cost-aware decision-making, replacement planning, and long-term risk management.
+
 
 ---
 
@@ -20,44 +21,51 @@ This analysis supports that objective by examining league-wide player performanc
 
 ## Business Problem
 
-NBA roster spending shows clear inefficiencies when player salary is compared against on-court production. A small group of high-cost players consumes a disproportionate share of payroll. By grouping players into performance-based roles and measuring similarity within those groups, the analysis identifies viable replacement candidates delivering 80–90% of the production of higher-salary players. Importantly, these groupings remain largely stable under small statistical variation, indicating that identified alternatives are not driven by noise or outlier performance.
+Portfolio spending showed clear inefficiencies when cost was compared against on-court contribution. A small subset of high-cost assets consumed a disproportionate share of total budget, increasing exposure to aging, injury, and performance volatility.
 
-The objective was to analyze league-wide player data to uncover usage concentration, role redundancy, player similarity, and age-related performance decline patterns that influence roster stability, succession planning, and long-term competitive viability. The analysis uses season-level NBA player data and combines exploratory analysis, unsupervised learning, similarity modeling, dimensionality reduction, and interactive visualization to move from raw statistics to decision-support insights.
+Leadership needed a data-driven way to:
+- Measure contribution independent of labels or reputation  
+- Identify functional redundancy within the portfolio  
+- Evaluate whether comparable contribution could be achieved at lower cost  
+- Reduce financial risk without materially impacting aggregate output  
 
-This project reframes roster building as a resource allocation problem, rather than a talent ranking exercise.
+This analysis addresses those needs by grouping assets into functional archetypes and evaluating similarity within those groups rather than relying on traditional classifications.
+
 
 ---
 
-## Context
+## Operational Context
 
-### 2024 NBA Collective Bargaining Agreement
+Recent regulatory changes introduced hard constraints on portfolio flexibility, limiting the ability to correct inefficiencies through additional spending. Under the updated framework, exceeding predefined thresholds results in long-term penalties, including restricted future options and reduced liquidity.
 
-- **The Frozen Pick:** Teams above the apron have their 1st-round pick seven years out (e.g., 2032) frozen. If they remain above the apron for 2 of the next 4 years, that pick drops to the end of the round.
-- **Liquidity Freeze:** Teams cannot aggregate salaries in trades, cannot send cash in deals, and cannot use existing Trade Exceptions (TEs).
-- **The "One-Way" Trap:** High-salary players become immovable assets because opposing teams cannot aggregate smaller contracts to match the salary.
+As a result, inefficient allocations now represent structural risk rather than temporary financial cost. Decision-makers must proactively identify cost-efficient alternatives and manage concentration risk before constraints are breached.
 
-By utilizing Principal Component Analysis (PCA) to reduce noise and Cosine Similarity to identify statistically similar players, we identify low-cost assets (Minimum/Mid-Level Exception players) that provide >85% statistical similarity to high-cost stars but with lower volume.
+This context makes contribution-based analysis and replacement planning critical components of sustainable portfolio management.
+
 
 ---
 
 
 ## Data Used
 
-The data was pulled using beautifulsoup to scrape nba stats table for 2014 – 2024 This year frame was decided since the game dynamics have severly changed in the past 10 years.Players with fewer than 10 games played were excluded to reduce small-sample bias.
+The analysis uses season-level asset performance data collected from authoritative public sources and frozen into a structured dataset to ensure reproducibility.
 
-**Source:** Basketball-Reference “NBA 2024 Totals” table (scraped via Python).
+**Dataset characteristics:**
+- Time range: 2014–2024  
+- Unit of analysis: Asset per season  
+- Observations: ~700 asset-seasons after filtering  
 
-### Feature set used for clustering (9 total):
-- Volume/impact: PTS, AST, TRB, STL, BLK, TOV
-- Efficiency: FG%, 3P%, FT%
+**Feature categories:**
+- Contribution volume: scoring, playmaking, rebounding, defensive actions  
+- Efficiency indicators: shooting efficiency metrics  
+- Contextual attributes: age, participation level  
 
-### Preparation steps implemented in the notebook
-- Removed duplicate header rows embedded in the HTML table
-- Converted numeric columns to numeric types
-- Filled missing values with 0 before modeling
-- Standardized features using StandardScaler prior to clustering
+**Preparation steps:**
+- Removed duplicated records and embedded header artifacts  
+- Standardized numeric features to ensure cross-metric comparability  
+- Excluded low-participation assets to reduce small-sample bias  
 
-### Dataset Overview
+These steps prioritize structural signal and analytical reliability over short-term variance.
 
 The core dataset consists of NBA player season-level statistics, with one row per player per season. The dataset includes:
 - Player identifiers (name, team, position)
@@ -67,81 +75,67 @@ The core dataset consists of NBA player season-level statistics, with one row pe
 - Efficiency indicators (field goal %, three-point %, free throw %)
 - Supporting statistics (turnovers, steals, blocks)
 
-This dataset was assembled from authoritative public NBA sources and frozen into a CSV to ensure reproducibility across Python analyses and Tableau dashboards.
-
-### Scope Decisions
-- Analysis is conducted at the season level, not game level
-- Players with minimal playing time were excluded to reduce noise
-
-### Key data components:
-- Offensive production: Points, assists, turnovers
-- Rebounding & defense: Total rebounds, steals, blocks
-- Efficiency metrics: Field goal %, three-point %, free throw %
-- Team identifiers: Used for roster composition analysis
-
-All numeric features were standardized prior to analysis to ensure comparability across metrics with different scales.
-
 <img width="752" height="456" alt="Picture1" src="https://github.com/user-attachments/assets/251da94a-5d35-4c15-9b24-fa7972c14285" />
 
 - - - 
 ## Key Questions Answered
 
-- Which players provide the highest on-court production relative to their cost?
-- Which high-salary players have statistically similar lower-cost alternatives?
-- How can players be grouped by performance profile independent of position?
-- Which players sit on the boundary between roles, indicating replaceability or volatility?
-- Where do rosters present opportunities to reduce payroll without reducing output?
-- Can player production be replicated at a lower cost?
-- Are there players across the league who produce statistically similar output to high-usage or high-salary players, but are paid significantly less?
-- Which player attributes actually define “similarity”?
-- Beyond points per game, which combination of usage, efficiency, playmaking, and defensive metrics best capture a player’s on-court role?
-- Which undervalued players are the best fit to fill specific team gaps?
-
-
+- Which assets deliver the highest contribution relative to cost?
+- Where is contribution concentrated, creating dependency risk?
+- Which high-cost assets have statistically comparable lower-cost substitutes?
+- How can assets be grouped by functional contribution independent of labels?
+- Where does the portfolio present opportunities to reduce cost without reducing output?
+- Which assets exhibit higher volatility or replacement risk based on stability analysis?
+  
 ---
 
 ## Primary Business Value
 
 ### Portfolio Risk Management
-- **Objective:** Prevent over-allocation of capital toward declining assets.
-- **Methodology:** Utilizing the Age-Performance Dashboard, the system identifies the statistical "inflection point" where production begins to decouple from market value.
+- **Objective:** Reduce exposure to declining or volatile high-cost assets.
+- **Approach:** Analyzed age-related contribution patterns and stability indicators to identify inflection points where contribution decouples from cost.
+- **Value:** Enables earlier intervention in contract planning and succession decisions before risk materializes.
 
-### Capital Efficiency & Asset Arbitrage
-- **Objective:** Maximize roster productivity within the constraints of the salary cap.
-- **Methodology:** identifies "undervalued clusters" - players who deliver elite-tier output (efficiency, defensive impact) but are currently priced as mid-tier assets because of lower volume.
-- **Business Outcome:** Locates market inefficiencies to optimize "Points per Dollar" spent.
+### Capital Efficiency
+- **Objective:** Maximize total portfolio contribution within fixed budget constraints.
+- **Approach:** Grouped assets into functional archetypes and evaluated similarity within those groups to identify lower-cost substitutes with comparable contribution profiles.
+- **Value:** Supports reallocation of spend without materially reducing aggregate output.
 
-### Structural Roster Auditing
-- **Objective:** Identify tactical gaps that traditional depth charts obscure.
-- **Methodology:** Implemented K-Means Clustering to categorize players by functional Archetypes over standard positions (Secondary Playmakers vs. Interior Anchors).
-- **Business Outcome:** Visualizes roster gaps allowing GMs to target specific skill sets such as perimeter spacing or rim protection rather than filling a PG, SG, PF, C, SF.
+### Structural Portfolio Auditing
+- **Objective:** Identify functional gaps and redundancies that traditional classifications obscure.
+- **Approach:** Used contribution-based archetypes rather than labels to assess coverage across functional roles.
+- **Value:** Improves targeting of specific capability needs instead of over-investing in redundant profiles.
 
 ---
+## Key Insights
 
-##  Key Insights
-### Performance-Based Player Segmentation
+### 1. Contribution Is Highly Concentrated
+A small subset of assets accounts for a disproportionate share of total contribution across the portfolio. This concentration increases dependency risk and amplifies the impact of performance decline or unavailability.
 
-Players were grouped into four performance profiles based on multi-dimensional statistical similarity rather than traditional positions:
+### 2. Cost and Contribution Are Weakly Aligned Within Roles
+Within the same functional archetype, contribution profiles vary far less than associated cost. Multiple lower-cost assets exhibit statistically similar contribution patterns to higher-cost counterparts, indicating inefficiencies driven by factors beyond measurable output.
+
+### 3. Functional Archetypes Reveal Hidden Redundancy
+Grouping assets by contribution patterns rather than labels exposes both redundancy and coverage gaps that are not visible through traditional classifications. Some portfolios concentrate spend within a narrow set of archetypes, while others distribute contribution more evenly.
+
+### 4. Replacement Feasibility Exists Across Cost Tiers
+Similarity analysis identifies viable substitutes delivering approximately 80–90% comparable contribution within the same archetype. These substitutes represent practical options for cost reduction, role transition, or contingency planning.
+
+### 5. Stability Analysis Identifies Higher-Risk Profiles
+Robustness testing shows that while most assets retain stable archetype assignments, a subset frequently shifts roles under small perturbations. These borderline profiles carry higher evaluation risk and warrant closer monitoring.
+
+### 6. Aging Patterns Increase Risk in High-Usage Roles
+High-usage archetypes exhibit earlier and steeper contribution decline compared to lower-usage profiles. Delayed reallocation away from these roles increases the likelihood of abrupt performance cliffs rather than gradual transitions.
+
 
 <img width="388" height="198" alt="2" src="https://github.com/user-attachments/assets/9861e7ce-7ef3-4772-ab0b-7d842cc26345" />
 
-
-- Cluster 2 has the highest average PTS and AST (high-usage offensive hub profile).
-
 <img width="597" height="195" alt="Picture3" src="https://github.com/user-attachments/assets/ec7f6e81-f281-4e6d-a2af-e4727af68050" />
-
-- Luka Dončić, Shai Gilgeous-Alexander, Giannis Antetokounmpo, Jalen Brunson, Nikola Jokić appear with Cluster = 2 in the displayed head output. This supports the interpretation that one cluster is capturing primary offensive engines.
-- Cluster 0 shows the highest average TRB and BLK (interior/rebounding + rim protection profile).
-- Cluster 1 is extremely low across metrics (low-usage / limited production profile).
-- Cluster 3 sits between clusters 1 and 2 (mid-usage contributors).
-
-This role-based segmentation reveals that players with similar on-court responsibilities often exist across salary tiers.
 
 --- 
 
-### Cost–Production Misalignment
    <img width="572" height="382" alt="Picture4" src="https://github.com/user-attachments/assets/e8ba91fc-4729-494b-9e44-579aab790f71" />
-Within the same performance groups, player production varies far less than player compensation. Multiple lower-cost players demonstrate statistical profiles that closely mirror those of significantly higher-paid peers, suggesting market inefficiencies driven by reputation, tenure, or contract timing rather than output alone. This misalignment creates opportunities for teams to reallocate salary without materially impacting performance.
+
 
 ---
 
@@ -323,53 +317,66 @@ The model returned a "Composite Aggregate" of three players:
 - Aggregate 3P%: 38.1% (+1.1% vs Target).
 
 ---
-
 ## KPIs & Decision Metrics
 
-### Key Performance Indicators used in this analysis include:
-- Cost per Unit of Production (salary proxy vs composite performance)
-- Performance Similarity Score (%)
-- Cluster Distance from Role Center (volatility indicator)
-- Percentage of Roster in High-Cost / High-Replaceability Roles
+The analysis uses a focused set of metrics designed to support portfolio-level decision-making rather than isolated performance evaluation.
 
-### 1. Usage Concentration Ratio
-- Top X players’ usage / total team usage
-- Purpose: Identify over-dependence on a small core
+### Core Metrics
 
-### 2. Role Redundancy Score
-- Average similarity distance between top-usage players and next-tier contributors
-- Purpose: Measure substitution readiness
+- **Contribution-to-Cost Ratio**  
+  Measures aggregate contribution relative to cost to identify inefficient allocations.
 
-### 3. Aging Exposure Index
-- Share of usage allocated to players aged 30+
-- Purpose: Quantify decline risk concentration
+- **Performance Similarity Score**  
+  Quantifies statistical similarity between assets within the same functional archetype to evaluate substitution feasibility.
 
-### Cluster Composition Metrics
-- Players per cluster
-- Cluster-level average PTS/AST/TRB/STL/BLK
+- **Role Stability Index**  
+  Captures sensitivity of archetype assignment under small performance perturbations, serving as a proxy for evaluation risk.
+
+- **Usage Concentration Ratio**  
+  Measures the share of total contribution generated by the highest-usage assets to assess dependency risk.
+
+- **Aging Exposure Index**  
+  Quantifies the proportion of total contribution attributed to older assets, indicating vulnerability to performance decline.
+
+### Portfolio Monitoring Use Cases
+
+These metrics enable leadership to:
+- Detect over-reliance on a small subset of high-cost assets  
+- Identify opportunities to rebalance spend without reducing output  
+- Monitor risk accumulation driven by aging or unstable profiles  
+- Track efficiency trends over time rather than relying on point-in-time judgments  
+
+
 
 ---
-
 ## Overview of Findings
 
-NBA player contribution is highly concentrated within a small number of high-usage roles. Clustering analysis reveals that a limited subset of players accounts for a disproportionate share of scoring and playmaking across the league. Similarity analysis shows that many statistically comparable players exist within these roles, suggesting underutilized substitution and load-management opportunities. Age-based analysis demonstrates that scoring output peaks in the mid-to-late 20s for guards and wings, followed by a sharp decline after age 30, with only a small number of outliers sustaining elite production.
+The analysis shows that portfolio contribution is concentrated within a limited set of high-usage functional archetypes. While these assets drive a majority of output, they also introduce elevated risk due to cost concentration, aging effects, and higher volatility.
+
+Similarity analysis demonstrates that statistically comparable contribution profiles exist across cost tiers within the same archetypes, indicating underutilized substitution capacity. This creates opportunities to rebalance spend without materially reducing aggregate output.
+
+Age-based patterns further reveal that high-usage archetypes experience earlier and steeper contribution decline, increasing the likelihood of abrupt performance cliffs when transitions are delayed. Together, these findings support proactive reallocation and succession planning rather than reactive correction.
+
+
 
 ---
 
 ## Recommendations
 
-- Instead of overpaying for Cluster 2 players, we should target the 3 players identified in the PCA outputs (e.g., players statistically similar to the cluster 3 but undervalued).
-- Prioritize replacing or restructuring contracts where lower-cost assets provide comparable production
-- Monitor borderline players closely due to higher performance volatility
-- Balance roster composition to reduce concentration of salary within a single role
+- Reallocate spend away from high-cost assets where statistically comparable substitutes exist within the same functional archetype
+- Reduce dependency risk by distributing contribution across multiple archetypes rather than concentrating output within a narrow profile
+- Prioritize early transition planning for high-usage roles with elevated aging exposure
+- Monitor borderline assets closely due to higher role instability and evaluation risk
+- Use similarity analysis as a screening layer for portfolio optimization and replacement planning decisions
 
 ---
 
 ## Assumptions & Caveats
 
-- Raw PPG favors high-usage roles
-- Analysis is based on a single season snapshot and does not capture multi-year trends
-- Salary figures are treated as external context rather than modeled directly
+- Contribution metrics favor higher-usage profiles and may understate low-volume efficiency
+- Analysis is based on season-level data and does not capture short-term variance
+- Cost figures are treated as external context rather than modeled inputs
+- Results are descriptive and intended to inform decision-making, not guarantee outcomes
 
 ---
 
