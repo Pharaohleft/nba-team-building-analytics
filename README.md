@@ -158,7 +158,7 @@ By measuring player-to-player similarity within performance groups, the analysis
 
 To test robustness, controlled statistical noise was introduced and player groupings were recalculated. The majority of players retained their original role classification, indicating that identified similarities are structural rather than incidental.
 
-- “144 players changed clusters after noise.”
+- 144 players changed clusters after noise.
 
 **Interpretation:**
 - Some clusters are stable (core members remain)
@@ -184,9 +184,6 @@ The clustering results show clear separation between role archetypes:
 
 The distribution of players across clusters is uneven: High-usage roles represent a minority of players but account for a majority of offensive output.
 
----
-
-### Why This Matters
 
 This mirrors concentration risk in other industries:
 - A small number of assets carry outsized importance
@@ -206,10 +203,6 @@ If a high-usage player declines or misses time, are there statistically comparab
 - Many players classified as secondary or low-usage contributors exhibit statistical profiles similar to higher-usage peers
 - Differences between players often stem from usage volume, not efficiency
 - Some teams possess internal redundancy that is not reflected in current rotations
-
----
-
-### Why This Matters
 
 Similarity analysis reveals latent substitution capacity:
 - Load management opportunities
@@ -234,9 +227,6 @@ Do players with similar early-career profiles evolve similarly over time?
 - Some players converge toward similar profiles, others diverge sharply
 - Usage growth and efficiency changes drive most trajectory divergence
 
----
-
-### Why This Matters
 
 Front offices often extrapolate future performance from early success. This analysis shows that development paths are unstable, reinforcing the need for ongoing profile monitoring rather than static projections.
 
@@ -260,20 +250,12 @@ How does scoring output change with age, and does this differ by position?
 - Slower decline
 - Less extreme dependency on athleticism and shot creation
 
----
-
-### Why This Matters
-
 - High-usage perimeter roles carry greater aging risk
 - Veteran outliers exist but should not be treated as planning baselines
 - Teams delaying role transitions often absorb sudden performance cliffs
 
----
+- **The Peak Performance Zone:** Most players hit their highest scoring potential in their late-20s .
 
-### Youth vs. Experience
-
-- **The Peak Performance Zone:** Most players hit their highest scoring potential in their mid-20s (like Jayson Tatum or Jaylen Brown).
-- **The Specialized Veterans:** Players like Al Horford show us that as you get older, your role changes.
 
 ---
 
